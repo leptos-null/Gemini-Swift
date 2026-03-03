@@ -10,7 +10,8 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install workflow dependencies
-        run: brew install xcbeautify
+        run: |
+          ( brew list xcbeautify &> /dev/null ) || brew install xcbeautify
 
       - name: Build
         run: |
