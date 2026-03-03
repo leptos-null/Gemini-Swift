@@ -8,10 +8,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Install workflow dependencies
+        run: brew install xcbeautify
+
       - name: Build
         run: |
-          xcodebuild docbuild \
+          # https://github.com/cpisciotta/xcbeautify#github-actions
+
+          set -o pipefail && xcodebuild docbuild \
             -scheme Gemini \
             -config Release \
-            -destination 'generic/platform=macOS' \
-            -quiet
+            -destination 'generic/platform=macOS' | xcbeautify --renderer github-actions
