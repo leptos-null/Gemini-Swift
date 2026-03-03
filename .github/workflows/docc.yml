@@ -1,0 +1,17 @@
+name: Build documentation
+
+on: push
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Build
+        run: |
+          xcodebuild docbuild \
+            -scheme Gemini \
+            -config Release \
+            -destination 'generic/platform=macOS' \
+            -quiet
