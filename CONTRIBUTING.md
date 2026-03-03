@@ -38,3 +38,5 @@ For consistency, all code in this repo should use the Xcode default formatting, 
 
 - indent width = 4 spaces
 - no trailing white-space unless the line is indentation-only (i.e. lines should not have extra tab or space characters at the end; "blank" lines should always have indentation such that adding a non-space character to the line would put that character at the expected indentation level)
+
+The `.editorconfig` file in this repo should help with this formatting.
