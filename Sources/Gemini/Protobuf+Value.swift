@@ -63,6 +63,12 @@ extension Protobuf.Value: ExpressibleByFloatLiteral {
     }
 }
 
+extension Protobuf.Value: ExpressibleByIntegerLiteral {
+    public init(integerLiteral value: Double.IntegerLiteralType) {
+        self = .number(.init(integerLiteral: value))
+    }
+}
+
 extension Protobuf.Value: ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = .bool(value)
