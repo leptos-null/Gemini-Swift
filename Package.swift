@@ -10,10 +10,20 @@ let package = Package(
             name: "Gemini",
             targets: ["Gemini"]
         ),
+        .library(
+            name: "GeminiTools",
+            targets: ["GeminiTools"]
+        )
     ],
     targets: [
         .target(
             name: "Gemini"
         ),
+        .target(
+            name: "GeminiTools",
+            dependencies: [
+                .target(name: "Gemini")
+            ]
+        )
     ]
 )
