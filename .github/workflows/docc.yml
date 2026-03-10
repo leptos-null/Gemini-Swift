@@ -18,6 +18,6 @@ jobs:
           # https://github.com/cpisciotta/xcbeautify#github-actions
 
           set -o pipefail && xcodebuild docbuild \
-            -scheme Gemini \
+            -scheme 'Gemini-Package' \
             -config Release \
             -destination 'generic/platform=macOS' | xcbeautify --renderer github-actions
