@@ -64,9 +64,11 @@ struct ClockGenerator: ToolGenerator {
     }
 }
 
+#endif
+
 @main
 struct SampleClient {
-    
+#if canImport(OSLog)
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
     private static func availableMain() async throws {
         let logger = Logger(subsystem: "null.leptos.sample", category: "main")
@@ -86,17 +88,20 @@ struct SampleClient {
         
         try await Task.sleep(for: .seconds(5))
     }
+#endif
     
     static func main() async throws {
+#if canImport(OSLog)
         if #available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *) {
             try await availableMain()
             
             // 1 more second so we can see `ToolFunctionRegistry` `deinit`
             try await Task.sleep(for: .seconds(1))
         } else {
-            fatalError()
+            fatalError("Platform version not supported")
         }
+#else
+        fatalError("Platform not supported")
+#endif
     }
 }
-
-#endif
