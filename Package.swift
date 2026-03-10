@@ -13,7 +13,8 @@ let package = Package(
         .library(
             name: "GeminiTools",
             targets: ["GeminiTools"]
-        )
+        ),
+        .executable(name: "SampleClient", targets: ["SampleClient"])
     ],
     targets: [
         .target(
@@ -24,6 +25,9 @@ let package = Package(
             dependencies: [
                 .target(name: "Gemini")
             ]
-        )
+        ),
+        .executableTarget(name: "SampleClient", dependencies: [
+            .target(name: "GeminiTools")
+        ])
     ]
 )
