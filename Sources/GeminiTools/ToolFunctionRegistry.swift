@@ -8,7 +8,7 @@ public actor ToolFunctionRegistry {
         case standardFunction(any ToolFunction)
         case generatorFunction(any ToolGenerator)
         
-        var declarationProvider: FunctionDeclarationProvider {
+        var declarationProvider: any FunctionDeclarationProvider {
             switch self {
             case .voidFunction(let provider): provider
             case .standardFunction(let provider): provider
