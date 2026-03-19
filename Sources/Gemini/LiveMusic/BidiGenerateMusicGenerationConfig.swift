@@ -30,8 +30,12 @@ public struct BidiGenerateMusicGenerationConfig: Codable, Sendable {
     ///
     /// Range is `[0.0, 1.0]`.
     public let brightness: Double?
+    /// The mode of music generation.
+    ///
+    /// Default is ``MusicGenerationMode/quality``.
+    public let musicGenerationMode: MusicGenerationMode?
     
-    public init(temperature: Double? = nil, topK: Int? = nil, seed: Int? = nil, guidance: Double? = nil, bpm: Int? = nil, density: Double? = nil, brightness: Double? = nil) {
+    public init(temperature: Double? = nil, topK: Int? = nil, seed: Int? = nil, guidance: Double? = nil, bpm: Int? = nil, density: Double? = nil, brightness: Double? = nil, musicGenerationMode: MusicGenerationMode? = nil) {
         self.temperature = temperature
         self.topK = topK
         self.seed = seed
@@ -39,5 +43,22 @@ public struct BidiGenerateMusicGenerationConfig: Codable, Sendable {
         self.bpm = bpm
         self.density = density
         self.brightness = brightness
+        self.musicGenerationMode = musicGenerationMode
+    }
+}
+
+extension BidiGenerateMusicGenerationConfig {
+    /// The mode of music generation.
+    ///
+    /// <https://ai.google.dev/api/live_music#musicgenerationmode>
+    public enum MusicGenerationMode: String, Codable, Sendable {
+        /// This value is unused.
+        case unspecified = "MUSIC_GENERATION_MODE_UNSPECIFIED"
+        /// This mode steers text prompts to regions of latent space with higher quality music.
+        case quality = "QUALITY"
+        /// This mode steers text prompts to regions of latent space with a larger diversity of music.
+        case diversity = "DIVERSITY"
+        /// This mode steers text prompts to regions of latent space more likely to generate vocal music.
+        case vocalization = "VOCALIZATION"
     }
 }
