@@ -5,5 +5,6 @@
 ///
 /// <https://ai.google.dev/api/live_music#bidigeneratemusicservercontent>
 public struct BidiGenerateMusicServerContent: Codable, Sendable {
-    // this declaration is not complete - see documentation above for all fields
+    /// Output only. Audio chunks that the model has generated.
+    public let audioChunks: [AudioChunk]
 }
