@@ -209,7 +209,7 @@ extension Schema {
         nullable: Bool? = nil,
         maxItems: String? = nil, minItems: String? = nil,
         example: Protobuf.Value? = nil,
-        items: Schema? = nil
+        items: Schema
     ) -> Self {
         .init(
             type: .array,
