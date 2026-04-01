@@ -7,7 +7,7 @@ public struct SessionResumptionUpdate: Codable, Sendable {
     /// New handle that represents a state that can be resumed.
     ///
     /// Empty if ``SessionResumptionUpdate/resumable``=`false`.
-    public let newHandle: String
+    public let newHandle: String?
     /// True if the current session can be resumed at this point.
     ///
     /// Resumption is not possible at some points in the session.
@@ -16,8 +16,15 @@ public struct SessionResumptionUpdate: Codable, Sendable {
     /// In these cases, ``SessionResumptionUpdate/newHandle`` will be empty and `resumable` will be false.
     public let resumable: Bool
     
-    public init(newHandle: String, resumable: Bool) {
+    public init(newHandle: String?, resumable: Bool) {
         self.newHandle = newHandle
         self.resumable = resumable
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.newHandle = try container.decodeIfPresent(String.self, forKey: .newHandle)
+        self.resumable = try container.decodeIfPresent(Bool.self, forKey: .resumable) ?? false
     }
 }
