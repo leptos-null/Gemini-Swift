@@ -53,13 +53,16 @@ public struct BidiGenerateContentSetup: Codable, Sendable {
     /// - Note: At the time of writing, requires ``InterfaceVersion/v1alpha``
     /// per <https://ai.google.dev/gemini-api/docs/live-guide#proactive-audio>
     public let proactivity: ProactivityConfig?
+    /// Configures the exchange of history between the client and the server.
+    public let historyConfig: HistoryConfig?
     
     public init(
         model: String, generationConfig: GenerationConfig?, systemInstruction: Content? = nil, tools: [Tool]? = nil,
         realtimeInputConfig: RealtimeInputConfig? = nil, sessionResumption: SessionResumptionConfig? = nil,
         contextWindowCompression: ContextWindowCompressionConfig? = nil,
         inputAudioTranscription: AudioTranscriptionConfig? = nil, outputAudioTranscription: AudioTranscriptionConfig? = nil,
-        proactivity: ProactivityConfig? = nil
+        proactivity: ProactivityConfig? = nil,
+        historyConfig: HistoryConfig? = nil
     ) {
         self.model = model
         self.generationConfig = generationConfig
@@ -71,5 +74,6 @@ public struct BidiGenerateContentSetup: Codable, Sendable {
         self.inputAudioTranscription = inputAudioTranscription
         self.outputAudioTranscription = outputAudioTranscription
         self.proactivity = proactivity
+        self.historyConfig = historyConfig
     }
 }
