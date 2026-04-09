@@ -22,12 +22,12 @@ public struct GenerationConfig: Codable, Sendable {
     public let enableAffectiveDialog: Bool?
     /// The maximum number of tokens to include in a response candidate.
     ///
-    /// - Note: The default value varies by model, see the `Model.output_token_limit` attribute of the Model returned from the getModel function.
+    /// - Note: The default value varies by model, see the ``Model/outputTokenLimit`` attribute of the ``Model`` returned from the `getModel` function.
     public let maxOutputTokens: Int?
     /// Presence penalty applied to the next token's logprobs if the token has already been seen in the response.
     ///
     /// This penalty is binary on/off and not dependent on the number of times the token is used (after the first).
-    /// Use ``frequencyPenalty`` or a penalty that increases with each use.
+    /// Use ``frequencyPenalty`` for a penalty that increases with each use.
     ///
     /// A positive penalty will discourage the use of tokens that have already been used in the response, increasing the vocabulary.
     /// A negative penalty will encourage the use of tokens that have already been used in the response, decreasing the vocabulary.
@@ -36,7 +36,7 @@ public struct GenerationConfig: Codable, Sendable {
     ///
     /// A positive penalty will discourage the use of tokens that have already been used, proportional to the number of times the token has been used: The more a token is used, the more difficult it is for the model to use that token again increasing the vocabulary of responses.
     ///
-    /// Caution: A negative penalty will encourage the model to reuse tokens proportional to the number of times the token has been used.
+    /// Caution: A *negative* penalty will encourage the model to reuse tokens proportional to the number of times the token has been used.
     /// Small negative values will reduce the vocabulary of a response.
     /// Larger negative values will cause the model to start repeating a common token until it hits the ``maxOutputTokens`` limit.
     public let frequencyPenalty: Double?
