@@ -21,6 +21,15 @@ public struct Part: Sendable {
         case executableCode(ExecutableCode)
         /// Result of executing the ``ExecutableCode``.
         case codeExecutionResult(CodeExecutionResult)
+        /// Server-side tool call.
+        ///
+        /// This field is populated when the model predicts a tool invocation that should be executed on the server.
+        /// The client is expected to echo this message back to the API.
+        case toolCall(ToolCall)
+        /// The output from a server-side ToolCall execution.
+        ///
+        /// This field is populated by the client with the results of executing the corresponding ``ToolCall``.
+        case toolResponse(ToolResponse)
     }
     
     public enum Metadata: Sendable {
@@ -39,15 +48,18 @@ public struct Part: Sendable {
     /// Agents using `Part` as content representation may need to keep track of the additional information.
     /// For example it can be name of a file/source from which the `Part` originates or a way to multiplex multiple `Part` streams.
     public let partMetadata: Protobuf.Struct?
+    /// Media resolution for the input media.
+    public let mediaResolution: MediaResolution?
     // (no doc comment)
     public let data: Data
     /// Controls extra preprocessing of data.
     public let metadata: Metadata?
     
-    public init(thought: Bool? = nil, thoughtSignature: Protobuf.Bytes? = nil, partMetadata: Protobuf.Struct? = nil, data: Data, metadata: Metadata? = nil) {
+    public init(thought: Bool? = nil, thoughtSignature: Protobuf.Bytes? = nil, partMetadata: Protobuf.Struct? = nil, mediaResolution: MediaResolution? = nil, data: Data, metadata: Metadata? = nil) {
         self.thought = thought
         self.thoughtSignature = thoughtSignature
         self.partMetadata = partMetadata
+        self.mediaResolution = mediaResolution
         self.data = data
         self.metadata = metadata
     }
@@ -58,6 +70,7 @@ extension Part: Codable {
         case thought
         case thoughtSignature
         case partMetadata
+        case mediaResolution
         
         // data
         case text
@@ -67,6 +80,8 @@ extension Part: Codable {
         case fileData
         case executableCode
         case codeExecutionResult
+        case toolCall
+        case toolResponse
         
         // metadata
         case videoMetadata
@@ -78,6 +93,7 @@ extension Part: Codable {
         self.thought = try container.decodeIfPresent(Bool.self, forKey: .thought)
         self.thoughtSignature = try container.decodeIfPresent(Protobuf.Bytes.self, forKey: .thoughtSignature)
         self.partMetadata = try container.decodeIfPresent(Protobuf.Struct.self, forKey: .partMetadata)
+        self.mediaResolution = try container.decodeIfPresent(MediaResolution.self, forKey: .mediaResolution)
         
         if let value = try container.decodeIfPresent(String.self, forKey: .text) {
             self.data = .text(value)
@@ -93,8 +109,18 @@ extension Part: Codable {
             self.data = .executableCode(value)
         } else if let value = try container.decodeIfPresent(CodeExecutionResult.self, forKey: .codeExecutionResult) {
             self.data = .codeExecutionResult(value)
+        } else if let value = try container.decodeIfPresent(ToolCall.self, forKey: .toolCall) {
+            self.data = .toolCall(value)
+        } else if let value = try container.decodeIfPresent(ToolResponse.self, forKey: .toolResponse) {
+            self.data = .toolResponse(value)
         } else {
-            let allKeys: [CodingKeys] = [.text, .inlineData, .functionCall, .functionResponse, .fileData, .executableCode, .codeExecutionResult]
+            let allKeys: [CodingKeys] = [
+                .text, .inlineData,
+                .functionCall, .functionResponse,
+                .fileData,
+                .executableCode, .codeExecutionResult,
+                .toolCall, .toolResponse
+            ]
             let keysFormatted = allKeys
                 .map { "'\($0.rawValue)'" }
                 .joined(separator: ", ")
@@ -114,6 +140,7 @@ extension Part: Codable {
         try container.encodeIfPresent(thought, forKey: .thought)
         try container.encodeIfPresent(thoughtSignature, forKey: .thoughtSignature)
         try container.encodeIfPresent(partMetadata, forKey: .partMetadata)
+        try container.encodeIfPresent(mediaResolution, forKey: .mediaResolution)
         
         switch data {
         case .text(let value):
@@ -130,6 +157,10 @@ extension Part: Codable {
             try container.encode(value, forKey: .executableCode)
         case .codeExecutionResult(let value):
             try container.encode(value, forKey: .codeExecutionResult)
+        case .toolCall(let value):
+            try container.encode(value, forKey: .toolCall)
+        case .toolResponse(let value):
+            try container.encode(value, forKey: .toolResponse)
         }
         
         switch metadata {

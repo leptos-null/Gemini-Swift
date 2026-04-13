@@ -7,7 +7,7 @@
 public struct FunctionDeclaration: Codable, Sendable {
     /// The name of the function.
     ///
-    /// Must be a-z, A-Z, 0-9, or contain underscores, colons, dots, and dashes, with a maximum length of 64.
+    /// Must be a-z, A-Z, 0-9, or contain underscores, colons, dots, and dashes, with a maximum length of 128.
     public let name: String
     /// A brief description of the function.
     public let description: String

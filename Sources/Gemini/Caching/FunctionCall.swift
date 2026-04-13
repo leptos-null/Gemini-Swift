@@ -2,13 +2,13 @@
 ///
 /// <https://ai.google.dev/api/caching#FunctionCall>
 public struct FunctionCall: Codable, Sendable {
-    /// The unique id of the function call.
+    /// Unique identifier of the function call.
     ///
     /// If populated, the client to execute the `functionCall` and return the response with the matching ``FunctionResponse/id``.
     public let id: String?
     /// The name of the function to call.
     ///
-    /// Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+    /// Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 128.
     public let name: String
     /// The function parameters and values in JSON object format.
     public let args: Protobuf.Struct?

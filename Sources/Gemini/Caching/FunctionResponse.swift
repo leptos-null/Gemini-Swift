@@ -11,7 +11,7 @@ public struct FunctionResponse: Codable, Sendable {
     public let id: String?
     /// The name of the function to call.
     ///
-    /// Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+    /// Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 128.
     public let name: String
     /// The function response in JSON object format.
     ///
@@ -46,10 +46,10 @@ public struct FunctionResponse: Codable, Sendable {
 }
 
 extension FunctionResponse {
-    /// A datatype containing media that is part of a FunctionResponse message.
+    /// A datatype containing media that is part of a ``FunctionResponse`` message.
     ///
     /// A `FunctionResponsePart` consists of data which has an associated datatype.
-    /// A `FunctionResponsePart` can only contain one of the accepted types in FunctionResponsePart.data.
+    /// A `FunctionResponsePart` can only contain one of the accepted types in ``FunctionResponse/Part/data``.
     ///
     /// A `FunctionResponsePart` must have a fixed IANA MIME type identifying the type and subtype of the media if the `inlineData` field is filled with raw bytes.
     ///
