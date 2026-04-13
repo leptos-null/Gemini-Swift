@@ -54,8 +54,18 @@ extension FunctionResponse {
     /// A `FunctionResponsePart` must have a fixed IANA MIME type identifying the type and subtype of the media if the `inlineData` field is filled with raw bytes.
     ///
     /// <https://ai.google.dev/api/caching#FunctionResponsePart>
-    public struct Part: Codable, Sendable {
-        // this declaration is not complete - see documentation above for all fields
+    public struct Part: Sendable {
+        public enum Data: Sendable {
+            /// Inline media bytes
+            case inlineData(FunctionResponse.Blob)
+        }
+        
+        /// The data of the function response part.
+        public let data: Data
+        
+        public init(data: Data) {
+            self.data = data
+        }
     }
     
     /// Raw media bytes for function response.
@@ -96,5 +106,35 @@ extension FunctionResponse {
         case whenIdle = "WHEN_IDLE"
         /// Add the result to the conversation context, interrupt ongoing generation and prompt to generate output.
         case interrupt = "INTERRUPT"
+    }
+}
+
+extension FunctionResponse.Part: Codable {
+    enum CodingKeys: String, CodingKey {
+        // data
+        case inlineData
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let value = try container.decodeIfPresent(FunctionResponse.Blob.self, forKey: .inlineData) {
+            self.data = .inlineData(value)
+        } else {
+            let allKeys: [CodingKeys] = [.inlineData]
+            let keysFormatted = allKeys
+                .map { "'\($0.rawValue)'" }
+                .joined(separator: ", ")
+            throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Expected one of \(keysFormatted)"))
+        }
+    }
+    
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        switch data {
+        case .inlineData(let data):
+            try container.encode(data, forKey: .inlineData)
+        }
     }
 }
