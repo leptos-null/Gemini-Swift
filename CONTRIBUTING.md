@@ -29,6 +29,7 @@ Including this documentation within the Package allows consumers of this Package
 
 Within each folder in this repo which is aligned with a page on <https://ai.google.dev/api>, the folder should contain the file `upstream_doc.md`. The contents of the file should be the markdown of the associated page, which can usually be accessed by a "View as Markdown" button at the top of each page. If a given page does not have a markdown format available, the file may be omitted from the folder in this repo.
 The contents of the site naturally changes from time to time, so keeping a snapshot of relevant pages within this repo helps to determine if this repo has become out of date. The Swift code in this repo should always be aligned with the local `upstream_doc.md`. When changes are made on <https://ai.google.dev/api>, contributors to this repo may update the `upstream_doc.md` file and relevant Swift code in a single commit so that they stay in sync.
+The `download_upstream_docs.sh` script is available for convenience to download updates for all `upstream_doc.md` files in the repo.
 
 ## Conformances
 
