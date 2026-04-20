@@ -1,2 +1,3 @@
 - All changes should adhere to [CONTRIBUTING.md](<./CONTRIBUTING.md>)
-- This repository is primarily an API wrapper, so you shouldn't need to know much more about the Gemini API, however if you do, the upstream Gemini API index URL is <https://ai.google.dev/gemini-api/docs/llms.txt>
+- Documentation for Google's Gemini API: <https://ai.google.dev/api/llms.txt>
+- Gemini API Docs and API Reference: <https://ai.google.dev/gemini-api/docs/llms.txt>
