@@ -13,7 +13,22 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Gemini"
+            name: "Gemini",
+            exclude: [
+                // explicitly exclude supporting files to avoid swift build warnings.
+                // this list can be generated using:
+                // `find -s 'Sources/Gemini' -name '*\.md' | while read FULL_PATH; do printf '"%s",\n' "${FULL_PATH#Sources/Gemini/}"; done`
+                "Caching/README.md",
+                "Caching/upstream_doc.md",
+                "Generate/README.md",
+                "Generate/upstream_doc.md",
+                "Live/README.md",
+                "Live/upstream_doc.md",
+                "LiveMusic/README.md",
+                "LiveMusic/upstream_doc.md",
+                "Models/README.md",
+                "Models/upstream_doc.md",
+            ]
         ),
     ]
 )
