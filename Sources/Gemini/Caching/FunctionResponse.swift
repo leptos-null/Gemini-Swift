@@ -73,7 +73,7 @@ extension FunctionResponse {
     /// Text should not be sent as raw bytes, use the ``FunctionResponse/response`` field.
     ///
     /// <https://ai.google.dev/api/caching#FunctionResponseBlob>
-    public struct Blob: Codable, Sendable {
+    public struct Blob: Codable, Hashable, Sendable {
         /// The IANA standard MIME type of the source data.
         ///
         /// Examples:

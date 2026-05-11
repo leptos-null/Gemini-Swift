@@ -20,6 +20,9 @@ extension IndirectOptional: Sendable where Wrapped: Sendable {
 extension IndirectOptional: Equatable where Wrapped: Equatable {
 }
 
+extension IndirectOptional: Hashable where Wrapped: Hashable {
+}
+
 extension IndirectOptional: Encodable where Wrapped: Encodable {
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()

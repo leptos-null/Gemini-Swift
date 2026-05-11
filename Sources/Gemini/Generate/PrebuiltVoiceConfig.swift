@@ -1,7 +1,7 @@
 /// The configuration for the prebuilt speaker to use.
 ///
 /// <https://ai.google.dev/api/generate-content#PrebuiltVoiceConfig>
-public struct PrebuiltVoiceConfig: Codable, Sendable {
+public struct PrebuiltVoiceConfig: Codable, Hashable, Sendable {
     /// The name of the preset voice to use.
     public let voiceName: String
     

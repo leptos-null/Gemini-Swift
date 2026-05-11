@@ -2,7 +2,7 @@ extension Protobuf {
     /// A dynamically typed value
     ///
     /// <https://protobuf.dev/reference/protobuf/google.protobuf/#value>
-    public enum Value: Codable, Sendable {
+    public enum Value: Codable, Hashable, Sendable {
         case string(String)
         case number(Double)
         case bool(Bool)

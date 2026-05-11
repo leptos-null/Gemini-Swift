@@ -10,7 +10,7 @@ extension Protobuf {
     /// however this type is not API compliant
     ///
     /// <https://protobuf.dev/reference/protobuf/google.protobuf/#duration>
-    public struct Duration: Codable, RawRepresentable, Sendable {
+    public struct Duration: Codable, RawRepresentable, Hashable, Sendable {
         public var rawValue: TimeInterval
         
         public init(rawValue: TimeInterval) {

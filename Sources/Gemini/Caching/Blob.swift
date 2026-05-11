@@ -3,7 +3,7 @@
 /// Text should not be sent as raw bytes, use the 'text' field.
 ///
 /// <https://ai.google.dev/api/caching#Blob>
-public struct Blob: Codable, Sendable {
+public struct Blob: Codable, Hashable, Sendable {
     /// The IANA standard MIME type of the source data.
     ///
     /// Examples:
