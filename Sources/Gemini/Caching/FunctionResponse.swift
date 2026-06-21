@@ -17,6 +17,9 @@ public struct FunctionResponse: Codable, Sendable {
     ///
     /// Callers can use any keys of their choice that fit the function's syntax to return the function output, e.g. "output", "result", etc.
     /// In particular, if the function call failed to execute, the response can have an "error" key to return error details to the model.
+    ///
+    /// Multimedia can be included by using a sub-object containing a single `"$ref"` key whose value is the `inlineData.display_name` of a
+    /// ``FunctionResponse/Part`` holding the multimedia. See <https://ai.google.dev/gemini-api/docs/function-calling#multimodal>.
     public let response: Protobuf.Struct
     /// Ordered Parts that constitute a function response.
     ///

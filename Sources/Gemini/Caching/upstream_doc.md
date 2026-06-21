@@ -44,7 +44,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
 
     client = genai.Client()
     document = client.files.upload(file=media / "a11.txt")
-    model_name = "gemini-1.5-flash-001"
+    model_name = "gemini-3.5-flash"
 
     cache = client.caches.create(
         model=model_name,
@@ -60,7 +60,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
         contents="Please summarize this transcript",
         config=types.GenerateContentConfig(cached_content=cache.name),
     )
-    print(response.text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/cache.py#L25-L46
+    print(response.text)
 
 ### Node.js
 
@@ -73,7 +73,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
       config: { mimeType: "text/plain" },
     });
     console.log("Uploaded file name:", document.name);
-    const modelName = "gemini-1.5-flash-001";
+    const modelName = "gemini-3.5-flash";
 
     const contents = [
       createUserContent(createPartFromUri(document.uri, document.mimeType)),
@@ -93,7 +93,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
       contents: "Please summarize this transcript",
       config: { cachedContent: cache.name },
     });
-    console.log("Response text:", response.text);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/cache.js#L33-L62
+    console.log("Response text:", response.text);
 
 ### Go
 
@@ -106,7 +106,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     	log.Fatal(err)
     }
 
-    modelName := "gemini-1.5-flash-001"
+    modelName := "gemini-3.5-flash"
     document, err := client.Files.UploadFromPath(
     	ctx, 
     	filepath.Join(getMedia(), "a11.txt"), 
@@ -147,7 +147,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     if err != nil {
     	log.Fatal(err)
     }
-    printResponse(response)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/cache.go#L16-L66
+    printResponse(response)
 
 ### Shell
 
@@ -196,7 +196,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
             },
           ],
           "cachedContent": "'$CACHE_NAME'"
-        }'https://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/cache.sh#L10-L59
+        }'
 
 ### From name
 
@@ -207,7 +207,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
 
     client = genai.Client()
     document = client.files.upload(file=media / "a11.txt")
-    model_name = "gemini-1.5-flash-001"
+    model_name = "gemini-3.5-flash"
 
     cache = client.caches.create(
         model=model_name,
@@ -225,7 +225,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
         contents="Find a lighthearted moment from this transcript",
         config=types.GenerateContentConfig(cached_content=cache.name),
     )
-    print(response.text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/cache.py#L52-L75
+    print(response.text)
 
 ### Node.js
 
@@ -238,7 +238,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
       config: { mimeType: "text/plain" },
     });
     console.log("Uploaded file name:", document.name);
-    const modelName = "gemini-1.5-flash-001";
+    const modelName = "gemini-3.5-flash";
 
     const contents = [
       createUserContent(createPartFromUri(document.uri, document.mimeType)),
@@ -260,7 +260,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
       contents: "Find a lighthearted moment from this transcript",
       config: { cachedContent: retrievedCache.name },
     });
-    console.log("Response text:", response.text);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/cache.js#L71-L102
+    console.log("Response text:", response.text);
 
 ### Go
 
@@ -273,7 +273,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     	log.Fatal(err)
     }
 
-    modelName := "gemini-1.5-flash-001"
+    modelName := "gemini-3.5-flash"
     document, err := client.Files.UploadFromPath(
     	ctx, 
     	filepath.Join(getMedia(), "a11.txt"), 
@@ -319,7 +319,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     	log.Fatal(err)
     }
     fmt.Println("Response from cache (create from name):")
-    printResponse(response)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/cache.go#L76-L131
+    printResponse(response)
 
 ### From chat
 
@@ -329,7 +329,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     from google.genai import types
 
     client = genai.Client()
-    model_name = "gemini-1.5-flash-001"
+    model_name = "gemini-3.5-flash"
     system_instruction = "You are an expert analyzing transcripts."
 
     # Create a chat session with the given system instruction.
@@ -364,14 +364,14 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     response = chat.send_message(
         message="I didn't understand that last part, could you explain it in simpler language?"
     )
-    print("\n\nmodel:  ", response.text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/cache.py#L81-L120
+    print("\n\nmodel:  ", response.text)
 
 ### Node.js
 
     // Make sure to include the following import:
     // import {GoogleGenAI} from '@google/genai';
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    const modelName = "gemini-1.5-flash-001";
+    const modelName = "gemini-3.5-flash";
     const systemInstruction = "You are an expert analyzing transcripts.";
 
     // Create a chat session with the system instruction.
@@ -418,7 +418,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
       message:
         "I didn't understand that last part, could you explain it in simpler language?",
     });
-    console.log("\n\nmodel:", response.text);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/cache.js#L111-L161
+    console.log("\n\nmodel:", response.text);
 
 ### Go
 
@@ -431,7 +431,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     	log.Fatal(err)
     }
 
-    modelName := "gemini-1.5-flash-001"
+    modelName := "gemini-3.5-flash"
     systemInstruction := "You are an expert analyzing transcripts."
 
     // Create initial chat with a system instruction.
@@ -507,7 +507,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     if err != nil {
     	log.Fatal(err)
     }
-    fmt.Println("\n\nmodel: ", resp.Text())https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/cache.go#L140-L225
+    fmt.Println("\n\nmodel: ", resp.Text())
 
 ### Response body
 
@@ -583,7 +583,7 @@ The request body must be empty.
 
     client = genai.Client()
     document = client.files.upload(file=media / "a11.txt")
-    model_name = "gemini-1.5-flash-001"
+    model_name = "gemini-3.5-flash"
 
     cache = client.caches.create(
         model=model_name,
@@ -592,7 +592,7 @@ The request body must be empty.
             "system_instruction": "You are an expert analyzing transcripts.",
         },
     )
-    print(client.caches.get(name=cache.name))https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/cache.py#L144-L157
+    print(client.caches.get(name=cache.name))
 
 ### Node.js
 
@@ -605,7 +605,7 @@ The request body must be empty.
       config: { mimeType: "text/plain" },
     });
     console.log("Uploaded file name:", document.name);
-    const modelName = "gemini-1.5-flash-001";
+    const modelName = "gemini-3.5-flash";
 
     const contents = [
       createUserContent(createPartFromUri(document.uri, document.mimeType)),
@@ -619,7 +619,7 @@ The request body must be empty.
       },
     });
     const retrievedCache = await ai.caches.get({ name: cache.name });
-    console.log("Retrieved Cache:", retrievedCache);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/cache.js#L199-L222
+    console.log("Retrieved Cache:", retrievedCache);
 
 ### Go
 
@@ -632,7 +632,7 @@ The request body must be empty.
     	log.Fatal(err)
     }
 
-    modelName := "gemini-1.5-flash-001"
+    modelName := "gemini-3.5-flash"
     document, err := client.Files.UploadFromPath(
     	ctx, 
     	filepath.Join(getMedia(), "a11.txt"), 
@@ -665,11 +665,11 @@ The request body must be empty.
     	log.Fatal(err)
     }
     fmt.Println("Retrieved cache:")
-    fmt.Println(cache)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/cache.go#L285-L327
+    fmt.Println(cache)
 
 ### Shell
 
-    curl "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"https://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/cache.sh#L69-L70
+    curl "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 
 ### Response body
 
@@ -723,7 +723,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
 
     client = genai.Client()
     document = client.files.upload(file=media / "a11.txt")
-    model_name = "gemini-1.5-flash-001"
+    model_name = "gemini-3.5-flash"
 
     cache = client.caches.create(
         model=model_name,
@@ -753,7 +753,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     client.caches.update(
         name=cache.name,
         config=types.UpdateCachedContentConfig(expire_time=expire_time),
-    )https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/cache.py#L184-L220
+    )
 
 ### Node.js
 
@@ -766,7 +766,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
       config: { mimeType: "text/plain" },
     });
     console.log("Uploaded file name:", document.name);
-    const modelName = "gemini-1.5-flash-001";
+    const modelName = "gemini-3.5-flash";
 
     const contents = [
       createUserContent(createPartFromUri(document.uri, document.mimeType)),
@@ -796,7 +796,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
       name: cache.name,
       config: { expireTime: expireTime },
     });
-    console.log("After update (expire_time):", cache);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/cache.js#L272-L311
+    console.log("After update (expire_time):", cache);
 
 ### Go
 
@@ -809,7 +809,7 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     	log.Fatal(err)
     }
 
-    modelName := "gemini-1.5-flash-001"
+    modelName := "gemini-3.5-flash"
     document, err := client.Files.UploadFromPath(
     	ctx, 
     	filepath.Join(getMedia(), "a11.txt"), 
@@ -841,13 +841,13 @@ A duration in seconds with up to nine fractional digits, ending with '`s`'. Exam
     if err != nil {
     	log.Fatal(err)
     }
-    fmt.Println("Cache deleted:", cache.Name)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/cache.go#L237-L278
+    fmt.Println("Cache deleted:", cache.Name)
 
 ### Shell
 
     curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
      -H 'Content-Type: application/json' \
-     -d '{"ttl": "600s"}'https://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/cache.sh#L74-L77
+     -d '{"ttl": "600s"}'
 
 ### Response body
 
@@ -885,7 +885,7 @@ The request body must be empty.
 
     client = genai.Client()
     document = client.files.upload(file=media / "a11.txt")
-    model_name = "gemini-1.5-flash-001"
+    model_name = "gemini-3.5-flash"
 
     cache = client.caches.create(
         model=model_name,
@@ -894,7 +894,7 @@ The request body must be empty.
             "system_instruction": "You are an expert analyzing transcripts.",
         },
     )
-    client.caches.delete(name=cache.name)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/cache.py#L126-L139
+    client.caches.delete(name=cache.name)
 
 ### Node.js
 
@@ -907,7 +907,7 @@ The request body must be empty.
       config: { mimeType: "text/plain" },
     });
     console.log("Uploaded file name:", document.name);
-    const modelName = "gemini-1.5-flash-001";
+    const modelName = "gemini-3.5-flash";
 
     const contents = [
       createUserContent(createPartFromUri(document.uri, document.mimeType)),
@@ -921,7 +921,7 @@ The request body must be empty.
       },
     });
     await ai.caches.delete({ name: cache.name });
-    console.log("Cache deleted:", cache.name);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/cache.js#L170-L193
+    console.log("Cache deleted:", cache.name);
 
 ### Go
 
@@ -934,7 +934,7 @@ The request body must be empty.
     	log.Fatal(err)
     }
 
-    modelName := "gemini-1.5-flash-001"
+    modelName := "gemini-3.5-flash"
     document, err := client.Files.UploadFromPath(
     	ctx, 
     	filepath.Join(getMedia(), "a11.txt"), 
@@ -966,11 +966,11 @@ The request body must be empty.
     if err != nil {
     	log.Fatal(err)
     }
-    fmt.Println("Cache deleted:", cache.Name)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/cache.go#L237-L278
+    fmt.Println("Cache deleted:", cache.Name)
 
 ### Shell
 
-    curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"https://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/cache.sh#L81-L82
+    curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 
 ### Response body
 
@@ -1137,7 +1137,7 @@ A base64-encoded string.
 Raw media bytes.
 
 Text should not be sent as raw bytes, use the 'text' field.
-Fields `mimeType` `string` The IANA standard MIME type of the source data. Examples: - image/png - image/jpeg If an unsupported MIME type is provided, an error will be returned. For a complete list of supported types, see [Supported file formats](https://ai.google.dev/gemini-api/docs/prompting_with_media#supported_file_formats).
+Fields `mimeType` `string` The IANA standard MIME type of the source data. Examples of supported types: - Images: image/png, image/jpeg, image/jpg, image/webp, image/heic, image/heif, image/gif, image/avif - Audio: audio/\*, video/audio/s16le, video/audio/wav - Video: video/\* - Text: text/plain, text/html, text/css, text/javascript, text/x-typescript, text/csv, text/markdown, text/x-python, text/xml, text/rtf, video/text/timestamp - Applications: application/x-javascript, application/x-typescript, application/x-python-code, application/json, application/x-ipynb+json, application/rtf, application/pdf For additional context, see [Supported file formats](https://ai.google.dev/gemini-api/docs/file-input-methods#supported-content-types). //
 `data` `string (https://developers.google.com/discovery/v1/type-format format)` Raw bytes for media formats.
 
 A base64-encoded string.
@@ -1163,6 +1163,8 @@ The result output from a `FunctionCall` that contains a string representing the 
 Fields `id` `string` Optional. The identifier of the function call this response is for. Populated by the client to match the corresponding function call `id`.
 `name` `string` Required. The name of the function to call. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 128.
 `response` ``object (`https://protobuf.dev/reference/protobuf/google.protobuf#struct` format)`` Required. The function response in JSON object format. Callers can use any keys of their choice that fit the function's syntax to return the function output, e.g. "output", "result", etc. In particular, if the function call failed to execute, the response can have an "error" key to return error details to the model.
+
+Multimedia can be included by using a subobject containing a single "$ref" key whose value is the `inlineData.display_name` of a `FunctionResponsePart` holding the multimedia. See <https://ai.google.dev/gemini-api/docs/function-calling#multimodal>.
 `parts[]` ``object (`https://ai.google.dev/api/caching#FunctionResponsePart`)`` Optional. Ordered `Parts` that constitute a function response. Parts may have different IANA MIME types.
 `willContinue` `boolean` Optional. Signals that function call continues, and more responses will be returned, turning the function call into a generator. Is only applicable to NON_BLOCKING function calls, is ignored otherwise. If set to false, future responses will not be considered. It is allowed to return empty `response` with `willContinue=False` to signal that the function call is finished. This may still trigger the model generation. To avoid triggering the generation and finish the function call, additionally set `scheduling` to `SILENT`.
 `scheduling` ``enum (`https://ai.google.dev/api/caching#Scheduling`)`` Optional. Specifies how the response should be scheduled in the conversation. Only applicable to NON_BLOCKING function calls, is ignored otherwise. Defaults to WHEN_IDLE.
@@ -1571,7 +1573,7 @@ Fields `fileSearchStoreNames[]` `string` Required. The names of the fileSearchSt
 
 ## McpServer
 
-A MCPServer is a server that can be called by the model to perform actions. It is a server that implements the MCP protocol. Next ID: 5
+A MCPServer is a server that can be called by the model to perform actions. It is a server that implements the MCP protocol. Next ID: 6
 Fields `name` `string` The name of the MCPServer.
 `transport` `Union type` The transport to use to connect to the MCPServer. `transport` can be only one of the following: `streamableHttpTransport` ``object (`https://ai.google.dev/api/caching#StreamableHttpTransport`)`` A transport that can stream HTTP requests and responses.
 

@@ -1,5 +1,3 @@
-# Live Music API - WebSockets API reference
-
 <br />
 
 > [!WARNING]
