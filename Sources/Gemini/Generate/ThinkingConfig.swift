@@ -10,7 +10,8 @@ public struct ThinkingConfig: Codable, Sendable {
     public let thinkingBudget: Int?
     /// Controls the maximum depth of the model's internal reasoning process before it produces a response.
     ///
-    /// If not specified, the default is ``ThinkingLevel/high``.
+    /// The default value is model-dependent.
+    /// Refer to the [Thinking levels guide](<https://ai.google.dev/gemini-api/docs/thinking#thinking-levels>) for more details.
     /// Recommended for Gemini 3 or later models. Use with earlier models results in an error.
     public let thinkingLevel: ThinkingLevel?
     
